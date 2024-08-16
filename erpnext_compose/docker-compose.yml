@@ -2,7 +2,13 @@ version: "3"
 
 services:
   backend:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: erpnext_backend_container
+    image: erpnext_backend_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -12,7 +18,13 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   configurator:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: configurator_container
+    image: configurator_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -41,7 +53,13 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   create_site:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: create_site_container
+    image: create_site_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -92,7 +110,13 @@ services:
       - db_data:/var/lib/mysql
 
   frontend:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: frontend_container
+    image: frontend_image
     platform: linux/amd64
     depends_on:
       - websocket
@@ -117,7 +141,13 @@ services:
       - "8080:8080"
 
   queue-long:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: queue_long_container
+    image: queue_long_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -132,7 +162,13 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   queue-short:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: queue_short_container
+    image: queue_short_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -163,7 +199,13 @@ services:
       - redis_cache_data:/data
 
   scheduler:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: scheduler_container
+    image: scheduler_image
     platform: linux/amd64
     deploy:
       restart_policy:
@@ -176,7 +218,13 @@ services:
       - logs:/home/frappe/frappe-bench/logs
 
   websocket:
-    image: frappe/erpnext:v15.31.3
+    build:
+      context: ..
+      dockerfile: erpnext_compose/erpnext.Dockerfile
+      args:
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION}
+    container_name: websocket_container
+    image: websocket_image
     platform: linux/amd64
     deploy:
       restart_policy:
